@@ -15,12 +15,20 @@
 	</properties>
 
 	<dependencies>
-		<!-- JSTL standart tag library-->
+		<!-- LINK BACKEND PROJECT -->
+		<dependency>
+			<groupId>com.yalu</groupId>
+			<artifactId>shoppingbackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- JSTL standart tag library -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
 		<!-- SPRING_WEB MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -44,7 +52,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<!-- update to latest version of java -->
