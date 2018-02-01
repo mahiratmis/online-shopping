@@ -13,24 +13,37 @@ public class CategoryTestCase {
 
 	private static AnnotationConfigApplicationContext context;
 	private static CategoryDAO categoryDAO;
-	private Category category;
 
 	@BeforeClass
 	public static void init() {
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.yalu.shoppingbackend");
 		context.refresh();
-		
-		categoryDAO = (CategoryDAO)context.getBean("categoryDAO");
+
+		categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
 	}
-	
+
 	@Test
-	public void testAddCategory() {
-		Category ct = new Category();
-		ct.setName("TV");
-		ct.setDescription("13 inches multicolor");
-		ct.setImageURL("CAT_1.png");
-		
-		assertEquals("Succesfully Added", true, categoryDAO.add(ct));		
+	public void testCRUDOperations() {
+		// ADD
+		Category category = new Category();
+		category.setName("Appliences");
+		category.setDescription("13 inches multicolor");
+		category.setImageURL("CAT_1.png");
+
+		assertEquals("Succesfully Added", true, categoryDAO.add(category));
+
+		// retrieve category with id 3
+		category = categoryDAO.get(3);
+
+		// update that category
+		category.setName("TiViBuu");
+		assertEquals("Succesfully updated a single category", true, categoryDAO.update(category));
+
+		// delete the category
+		assertEquals("Succesfully deleted a single category", true, categoryDAO.delete(category));
+
+		// fetch all categories after deletion operation
+		assertEquals("Succesfully retrieved all active categories", 4, categoryDAO.list().size());
 	}
 }
