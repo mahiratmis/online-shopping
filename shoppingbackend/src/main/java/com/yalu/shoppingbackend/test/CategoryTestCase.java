@@ -31,19 +31,19 @@ public class CategoryTestCase {
 		category.setDescription("13 inches multicolor");
 		category.setImageURL("CAT_1.png");
 
-		assertEquals("Succesfully Added", true, categoryDAO.add(category));
+		assertEquals("Something went wrong while adding", true, categoryDAO.add(category));
 
 		// retrieve category with id 3
 		category = categoryDAO.get(3);
 
 		// update that category
 		category.setName("TiViBuu");
-		assertEquals("Succesfully updated a single category", true, categoryDAO.update(category));
+		assertEquals("Something went wrong while updating a single category", true, categoryDAO.update(category));
 
 		// delete the category
-		assertEquals("Succesfully deleted a single category", true, categoryDAO.delete(category));
+		assertEquals("Something went wrong while  deleting a single category", true, categoryDAO.delete(category));
 
 		// fetch all categories after deletion operation
-		assertEquals("Succesfully retrieved all active categories", 4, categoryDAO.list().size());
+		assertEquals("Something went wrong while  retrieving all active categories", 4, categoryDAO.list().size());
 	}
 }

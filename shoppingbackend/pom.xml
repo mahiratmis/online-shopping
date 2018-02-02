@@ -15,9 +15,24 @@
 		<javaee.version>8.0</javaee.version>
 		<springwmvc.version>4.3.12.RELEASE</springwmvc.version>
 		<hibernate.version>5.2.7.Final</hibernate.version>
+		<json.version>2.8.7</json.version>
 	</properties>
 
 	<dependencies>
+	
+		<!-- JACKSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+
+		<!-- JACKSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${json.version}</version>
+		</dependency>				
 	
 		<!-- DBCP Connection Pooling -->
 		<dependency>

@@ -24,13 +24,19 @@
 <title>Company Enterprise Framework - ${title}</title>
 <script>
 	window.menu = '${title}';
+	window.contextRoot ='${contextRoot}';
 </script>
 
-<!-- Bootstrap core CSS -->
+<!-- Bootstrap 4 core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap dataTable CSS -->
+<link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
 <!-- Bootstrap materia theme CSS -->
 <link href="${css}/bootstrapmateria.css" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -61,22 +67,27 @@
 			</c:if>
 
 			<!-- load only when user clicks ALL PRODUCTS or CATEGORY PRODUCTS link -->
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
+			<c:if
+				test="${userClickAllProducts == true or userClickCategoryProducts == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
 
 
 		</div>
 		<!-- Footer -->
-		<%@include file="./shared/footer.jsp"%>
+		 <%@include file="./shared/footer.jsp"%> 
 
-		<!-- Bootstrap core JavaScript -->
+
+		<!-- JQUERY -->
 		<script src="${js}/jquery.js"></script>
+		<script src="${js}/jquery.dataTables.js"></script>
+		<script src="${js}/dataTables.bootstrap4.js"></script>
+		
+		<!-- BOOTSRAP -->
 		<script src="${js}/bootstrap.bundle.min.js"></script>
+		<!-- CUSTOM JS -->
 		<script src="${js}/myapp.js"></script>
 
 	</div>
-
 </body>
-
 </html>
