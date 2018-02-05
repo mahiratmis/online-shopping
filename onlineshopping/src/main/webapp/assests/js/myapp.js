@@ -40,9 +40,11 @@ $(function() {
 					columns : [
 							{
 								data : 'code',
+								bSortable : false,
 								mRender : function(data, type, raw) {
 									return '<img src="' + window.contextRoot
-											+ '/resources/images/'+data+'.jpg" class="dataTableImg"/>';
+											+ '/resources/images/' + data
+											+ '.png" class="dataTableImg"/>';
 								}
 							},
 							{
@@ -58,10 +60,13 @@ $(function() {
 								}
 							},
 							{
-								data : 'quantity'
-							},
-							{
-								data : 'purchases'
+								data : 'quantity',
+								mRender : function(data, type, row) {
+									if (data < 1) {
+										return '<span style="color:red">Out of Stock!</span>';
+									}
+									return data;
+								}
 							},
 							{
 								data : 'views'
@@ -70,18 +75,28 @@ $(function() {
 								data : 'id',
 								mRender : function(data, type, raw) {
 									var str = '';
+								
 									str += '<a title="View Details" href="'
-											+ window.contextRoot
-											+ '/show/'
-											+ data
-											+ '/product" class="btn btn-primary btn-sm">';
-									str += '<i class="fa fa-eye fa-sm"></i></a>&#160;';
+										+ window.contextRoot
+										+ '/show/'
+										+ data
+										+ '/product" class="btn btn-primary btn-sm">';
+								str += '<i class="fa fa-eye fa-sm"></i></a>&#160;';		
+								
+								if (raw.quantity < 1) {
+									str += '<a title="Add to Cart" href="javascript:void(0)" class="btn btn-success btn-sm disabled">';
+								str += '<i class="fa fa-cart-plus fa-sm"></i></a>';										
+
+								} else {
 									str += '<a title="Add to Cart" href="'
-											+ window.contextRoot
-											+ '/cart/add/'
-											+ data
-											+ '/product" class="btn btn-success btn-sm">';
-									str += '<i class="fa fa-cart-plus fa-sm"></i></a>';
+										+ window.contextRoot
+										+ '/cart/add/'
+										+ data
+										+ '/product" class="btn btn-success btn-sm">';
+								str += '<i class="fa fa-cart-plus fa-sm"></i></a>';										
+
+								}								
+								
 									return str;
 								}
 							} ]

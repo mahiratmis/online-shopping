@@ -8,7 +8,7 @@
 		<div class="col-9">
 			<!-- bread crumb -->
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-12">
 					<c:if test="${userClickAllProducts==true}">
 						<script>
 							window.categoryId = '';
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-12">
 					<table id="productListTable"
 						class="table table-striped table-bordered">
 						<thead>
@@ -41,7 +41,6 @@
 								<th>Brand</th>
 								<th>Unit Price</th>
 								<th>Quantity</th>
-								<th>Purchases</th>
 								<th>Views</th>
 								<th></th>
 							</tr>
@@ -53,7 +52,6 @@
 								<th>Brand</th>
 								<th>Unit Price</th>
 								<th>Quantity</th>
-								<th>Purchases</th>
 								<th>Views</th>
 								<th></th>
 							</tr>

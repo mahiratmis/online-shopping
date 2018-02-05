@@ -28,12 +28,24 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- SPRING_WEB MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springwmvc.version}</version>
+		</dependency>
+		<!-- exclude Commons Logging -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springwmvc.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- JAVAEE API -->
@@ -43,6 +55,8 @@
 			<version>${javaee.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		
 
 		<!-- JUNIT -->
 		<dependency>

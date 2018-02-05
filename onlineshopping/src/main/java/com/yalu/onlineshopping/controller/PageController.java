@@ -1,23 +1,36 @@
 package com.yalu.onlineshopping.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yalu.onlineshopping.exception.ProductNotFoundException;
 import com.yalu.shoppingbackend.dao.CategoryDAO;
+import com.yalu.shoppingbackend.dao.ProductDAO;
 import com.yalu.shoppingbackend.dto.Category;
+import com.yalu.shoppingbackend.dto.Product;
+
 
 @Controller
 public class PageController {
 	
+	private static final Logger Logger= LoggerFactory.getLogger(PageController.class);
+	
 	@Autowired
 	private CategoryDAO categoryDAO;
-	
+	@Autowired
+	private ProductDAO productDAO;
 
 	@RequestMapping(value = {"/","/home","/index"})
 	public ModelAndView index() {
+		
+		Logger.info("Inside PageController index -INFO");
+		//Logger.debug("Inside PageController index -DEBUG");
+		
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("title", "Home");
 		mv.addObject("userClickHome", true);
@@ -53,6 +66,9 @@ public class PageController {
 		return mv;
 	}	
 	
+	/*
+	 * Viewing products of a given category
+	 * */	
 	@RequestMapping(value = "/show/category/{id}/products")
 	public ModelAndView showCategoryProducts(
 			@PathVariable("id")
@@ -71,27 +87,28 @@ public class PageController {
 		return mv;
 	}	
 	
-/*	@RequestMapping(value = "/test")
-	public ModelAndView test(
-			@RequestParam(value="greeting", required=false)
-			String greeting) {
-		if (greeting == null) {
-			greeting = "Holaaaa";
-		}
+	/*
+	 * Viewing a single product
+	 * */
+	
+	@RequestMapping(value = "/show/{id}/product") 
+	public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException{
+		
 		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("greeting", greeting);
+		
+		Product product = productDAO.get(id);
+		
+		if(product == null)
+			throw new ProductNotFoundException();
+		
+		// update the view count
+		product.setViews(product.getViews() + 1);
+		productDAO.update(product);		
+		
+		mv.addObject("title", product.getName());
+		mv.addObject("product", product);		
+		mv.addObject("userClickShowProduct", true);
+				
 		return mv;
 	}
-
-	@RequestMapping(value = "/test/{greeting}")
-	public ModelAndView test(
-			@PathVariable("greeting")
-			String greeting) {
-		if (greeting == null) {
-			greeting = "Holaaaa";
-		}
-		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("greeting", greeting);
-		return mv;
-	}	*/
 }
