@@ -24,7 +24,7 @@
 <title>Company Enterprise Framework - ${title}</title>
 <script>
 	window.menu = '${title}';
-	window.contextRoot ='${contextRoot}';
+	window.contextRoot = '${contextRoot}';
 </script>
 
 <!-- Bootstrap 4 core CSS -->
@@ -32,11 +32,12 @@
 <!-- Bootstrap dataTable CSS -->
 <link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
-<!-- Bootstrap materia theme CSS -->
-<link href="${css}/bootstrapmateria.css" rel="stylesheet">
+<!-- Bootstrap materia theme CSS
+<link href="${css}/bootstrapmateria.css" rel="stylesheet">  -->
 
 <!-- Font Awesome Icons -->
-<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+	rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -44,7 +45,6 @@
 </head>
 
 <body>
-
 	<div class="wrapper">
 		<!-- Navigation -->
 		<%@include file="./shared/navbar.jsp"%>
@@ -71,26 +71,30 @@
 				test="${userClickAllProducts == true or userClickCategoryProducts == true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
-			
+
 			<!-- load only when user clicks to view A SINGLE PRODUCT DETAIL link -->
-			<c:if
-				test="${userClickShowProduct == true}">
+			<c:if test="${userClickShowProduct == true}">
 				<%@include file="singleProduct.jsp"%>
-			</c:if>			
+			</c:if>
+			<!-- load only when user clicks MANAGE PRODUCTs link -->
+			<c:if test="${userClickManageProducts == true}">
+				<%@include file="manageProducts.jsp"%>
+			</c:if>
 
 
 		</div>
 		<!-- Footer -->
-		 <%@include file="./shared/footer.jsp"%> 
+		<%@include file="./shared/footer.jsp"%>
 
 
 		<!-- JQUERY -->
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/jquery.dataTables.js"></script>
 		<script src="${js}/dataTables.bootstrap4.js"></script>
-		
+
 		<!-- BOOTSRAP -->
 		<script src="${js}/bootstrap.bundle.min.js"></script>
+
 		<!-- CUSTOM JS -->
 		<script src="${js}/myapp.js"></script>
 
