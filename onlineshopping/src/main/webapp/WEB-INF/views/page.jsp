@@ -94,6 +94,9 @@
 
 		<!-- BOOTSRAP -->
 		<script src="${js}/bootstrap.bundle.min.js"></script>
+		
+		<!-- BOOTBOX -->
+		<script src="${js}/bootbox.min.js"></script>		
 
 		<!-- CUSTOM JS -->
 		<script src="${js}/myapp.js"></script>

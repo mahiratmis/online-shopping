@@ -12,7 +12,7 @@ $(function() {
 		break;
 	case 'Manage Products':
 		$('#manageProducts').addClass('active');
-		break;		
+		break;
 	default:
 		if (menu == 'Home')
 			break;
@@ -47,7 +47,7 @@ $(function() {
 								mRender : function(data, type, raw) {
 									return '<img src="' + window.contextRoot
 											+ '/resources/images/' + data
-											+ '.png" class="dataTableImg"/>';
+											+ '.jpg" class="dataTableImg"/>';
 								}
 							},
 							{
@@ -78,32 +78,180 @@ $(function() {
 								data : 'id',
 								mRender : function(data, type, raw) {
 									var str = '';
-								
+
 									str += '<a title="View Details" href="'
-										+ window.contextRoot
-										+ '/show/'
-										+ data
-										+ '/product" class="btn btn-primary btn-sm">';
-								str += '<i class="fa fa-eye fa-sm"></i></a>&#160;';		
-								
-								if (raw.quantity < 1) {
-									str += '<a title="Add to Cart" href="javascript:void(0)" class="btn btn-success btn-sm disabled">';
-								str += '<i class="fa fa-cart-plus fa-sm"></i></a>';										
+											+ window.contextRoot
+											+ '/show/'
+											+ data
+											+ '/product" class="btn btn-primary btn-sm">';
+									str += '<i class="fa fa-eye fa-sm"></i></a>&#160;';
 
-								} else {
-									str += '<a title="Add to Cart" href="'
-										+ window.contextRoot
-										+ '/cart/add/'
-										+ data
-										+ '/product" class="btn btn-success btn-sm">';
-								str += '<i class="fa fa-cart-plus fa-sm"></i></a>';										
+									if (raw.quantity < 1) {
+										str += '<a title="Add to Cart" href="javascript:void(0)" class="btn btn-success btn-sm disabled">';
+										str += '<i class="fa fa-cart-plus fa-sm"></i></a>';
 
-								}								
-								
+									} else {
+										str += '<a title="Add to Cart" href="'
+												+ window.contextRoot
+												+ '/cart/add/'
+												+ data
+												+ '/product" class="btn btn-success btn-sm">';
+										str += '<i class="fa fa-cart-plus fa-sm"></i></a>';
+
+									}
+
 									return str;
 								}
 							} ]
 				});
 	}
 
+	/* for fading out the alert message after 5 seconds */
+	$alert = $('.alert');
+	if ($alert.length) {
+		setTimeout(function() {
+			$alert.fadeOut('slow');
+		}, 5000);
+	}
+	
+	
+	
+	// list of all products for admin
+	var $productsTable = $('#adminProductsTable');
+	
+	
+	if($productsTable.length) {
+		
+		var jsonUrl = window.contextRoot + '/json/data/admin/all/products';
+		console.log(jsonUrl);
+		
+		$productsTable.DataTable({
+					lengthMenu : [ [ 10, 30, 50, -1 ], [ '10 ', '30 ', '50 ', 'ALL' ] ],
+					pageLength : 30,
+					ajax : {
+						url : jsonUrl,
+						dataSrc : ''
+					},
+					columns : [		
+					           	{data: 'id'},
+					           	{data: 'code',
+					           	 bSortable: false,
+					           		mRender: function(data,type,row) {
+					           			return '<img src="' + window.contextRoot
+										+ '/resources/images/' + data
+										+ '.jpg" class="adminDataTableImg"/>';					           			
+					           		}
+					           	},
+					           	{
+									data : 'name'
+								},
+								{
+									data : 'brand'
+								},
+								{
+									data : 'quantity',
+									mRender : function(data, type, row) {
+
+										if (data < 1) {
+											return '<span style="color:red">Out of Stock!</span>';
+										}
+
+										return data;
+
+									}
+								},
+								{
+									data : 'unitPrice',
+									mRender : function(data, type, row) {
+										return '&#8377; ' + data
+									}
+								},
+								{
+									data : 'active',
+									bSortable : false,
+									mRender : function(data, type, row) {
+										var str = '';
+										if(data) {											
+											str += '<label class="switch"> <input type="checkbox" value="'+row.id+'" checked="checked">  <div class="slider round"> </div></label>';
+											
+										}else {
+											str += '<label class="switch"> <input type="checkbox" value="'+row.id+'">  <div class="slider round"> </div></label>';
+										}
+										
+										return str;
+									}
+								},
+								{
+									data : 'id',
+									bSortable : false,
+									mRender : function(data, type, row) {
+
+										var str = '';
+										str += '<a href="'
+												+ window.contextRoot
+												+ '/manage/'
+												+ data
+												+ '/product" class="btn btn-warning"><i	class="fa fa-edit fa-sm"></i></a> &#160;';
+
+										return str;
+									}
+								}					           	
+					],					
+					
+					initComplete: function () {
+						var api = this.api();
+						api.$('.switch input[type="checkbox"]').on('change' , function() {							
+							var dText = (this.checked)? 'You want to activate the Product?': 'You want to de-activate the Product?';
+							var checked = this.checked;
+							var checkbox = $(this);
+							debugger;
+						    bootbox.confirm({
+						    	size: 'medium',
+						    	title: 'Product Activation/Deactivation',
+						    	message: dText,
+						    	callback: function (confirmed) {
+							        if (confirmed) {
+							            $.ajax({							            	
+							            	type: 'GET',
+							            	url: window.contextRoot + '/manage/product/'+checkbox.prop('value')+'/activation',
+							        		timeout : 100000,
+							        		success : function(data) {
+							        			bootbox.alert(data);							        										        			
+							        		},
+							        		error : function(e) {
+							        			bootbox.alert('ERROR: '+ e);
+							        			//display(e);
+							        		}						            	
+							            });
+							        }
+							        else {							        	
+							        	checkbox.prop('checked', !checked);
+							        }
+						    	}
+						    });																											
+						});							
+					}
+				});
+	}
 });
+
+/*
+// Disabling form submissions if there are invalid fields
+$(function() {
+	'use strict';
+	window.addEventListener('load', function() {
+		// Fetch all the forms we want to apply custom Bootstrap validation
+		// styles to
+		var forms = document.getElementsByClassName('needs-validation');
+		// Loop over them and prevent submission
+		var validation = Array.prototype.filter.call(forms, function(form) {
+			form.addEventListener('submit', function(event) {
+				if (form.checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+		});
+	}, false);
+})(); */
