@@ -32,6 +32,10 @@
 <!-- Bootstrap dataTable CSS -->
 <link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
+<!-- Bootstrap mobile compatible dataTable CSS -->
+<link href="${css}/responsive.dataTables.min.css" rel="stylesheet">
+<link href="${css}/rowReorder.dataTables.min.css" rel="stylesheet">
+
 <!-- Bootstrap materia theme CSS
 <link href="${css}/bootstrapmateria.css" rel="stylesheet">  -->
 
@@ -90,14 +94,18 @@
 		<!-- JQUERY -->
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/jquery.dataTables.js"></script>
-		<script src="${js}/jquery.validate.js"></script>	
-			
-		<!-- BOOTSRAP -->	
+		<script src="${js}/jquery.validate.js"></script>
+
+		<!-- BOOTSRAP -->
 		<script src="${js}/dataTables.bootstrap4.js"></script>
 		<script src="${js}/bootstrap.bundle.min.js"></script>
-		
+
+		<!-- Mobile Compatible Responsive DataTable -->
+		<script src="${js}/dataTables.responsive.min.js"></script>
+		<script src="${js}/dataTables.rowReorder.min.js"></script>		
+
 		<!-- BOOTBOX -->
-		<script src="${js}/bootbox.min.js"></script>		
+		<script src="${js}/bootbox.min.js"></script>
 
 		<!-- CUSTOM JS -->
 		<script src="${js}/myapp.js"></script>

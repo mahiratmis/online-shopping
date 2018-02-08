@@ -102,7 +102,8 @@ $(function() {
 
 									return str;
 								}
-							} ]
+							} ],
+					responsive : true
 				});
 	}
 
@@ -205,6 +206,8 @@ $(function() {
 								}
 							} ],
 
+					responsive : true,
+
 					initComplete : function() {
 						var api = this.api();
 						api
@@ -221,6 +224,7 @@ $(function() {
 													.confirm({
 														size : 'medium',
 														title : 'Product Activation/Deactivation',
+														addClass : 'largeWidth',
 														message : dText,
 														callback : function(
 																confirmed) {
@@ -282,7 +286,7 @@ $(function() {
 				}
 			},
 			errorElement : 'em',
-			errorPlacement : function(error,element){
+			errorPlacement : function(error, element) {
 				error.addClass('help-block'); // add error block
 				error.insertAfter(element); // add after input element
 			}

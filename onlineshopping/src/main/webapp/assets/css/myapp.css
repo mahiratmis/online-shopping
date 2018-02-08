@@ -126,3 +126,8 @@ input:checked+.slider:before {
     order: 1;
 }
 
+.largeWidth {
+    margin: 0 auto;
+    width: 90%;
+}
+

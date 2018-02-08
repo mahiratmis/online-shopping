@@ -1,14 +1,14 @@
 <div class="container">
 	<div class="row">
 		<!-- display sidebar -->
-		<div class="col-3">
+		<div class="col-lg-3">
 			<%@include file="./shared/sidebar.jsp"%>
 		</div>
 		<!-- display products -->
-		<div class="col-9">
+		<div class="col-lg-9">
 			<!-- bread crumb -->
 			<div class="row">
-				<div class="col-12">
+				<div class="col-lg-12">
 					<c:if test="${userClickAllProducts==true}">
 						<script>
 							window.categoryId = '';
@@ -31,9 +31,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-lg-12">
 					<table id="productListTable"
-						class="table table-striped table-bordered">
+						class="display nowrap" cellspacing="0" width="100%">
 						<thead>
 							<tr>
 								<th></th>
