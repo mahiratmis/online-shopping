@@ -117,3 +117,12 @@ input:checked+.slider:before {
 .bootbox .modal-header button {
     order: 1;
 }
+
+/* Modal v4 alignment fix*/
+.modal .modal-header h4 {
+    order: 0;
+}
+.modal .modal-header button {
+    order: 1;
+}
+

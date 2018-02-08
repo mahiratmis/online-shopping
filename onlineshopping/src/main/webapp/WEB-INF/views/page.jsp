@@ -90,9 +90,10 @@
 		<!-- JQUERY -->
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/jquery.dataTables.js"></script>
+		<script src="${js}/jquery.validate.js"></script>	
+			
+		<!-- BOOTSRAP -->	
 		<script src="${js}/dataTables.bootstrap4.js"></script>
-
-		<!-- BOOTSRAP -->
 		<script src="${js}/bootstrap.bundle.min.js"></script>
 		
 		<!-- BOOTBOX -->

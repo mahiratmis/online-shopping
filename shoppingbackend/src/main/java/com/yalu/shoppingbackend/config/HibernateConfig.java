@@ -19,7 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class HibernateConfig {
 	
 	// Change the below based on the DBMS you choose
-	private final static String DATABASE_URL = "jdbc:mysql://localhost/test";
+	private final static String DATABASE_URL = "jdbc:mysql://test.cdnjepr98ixt.us-east-2.rds.amazonaws.com:3306/test";
+	//private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/test";
 	private final static String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.MySQLDialect";
 	private final static String DATABASE_USERNAME = "root";
@@ -57,7 +58,7 @@ public class HibernateConfig {
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
 		
-		//properties.put("hibernate.hbm2ddl.auto", "create");		
+		properties.put("hibernate.hbm2ddl.auto", "create");		
 		return properties;
 	}
 	
